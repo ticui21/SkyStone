@@ -7,9 +7,10 @@
  * Key features include:
  * - intake motors
  * - foundation latches
+ * - elevator to raise block
  *
- * 'Component' needs a lot of rework each season as the game theme will have a major impact on
- * a robot's components since each component is usually specifically designed to score points
+ * 'Component' needs a lot of rework each season. A different game theme will have a major impact on
+ * a robot's components since each component is usually designed to score points
  *
  * Written by Timothy (Tikki) Cui
  */
@@ -26,7 +27,7 @@ public class Component {
 
     private DcMotor leftIntake;
     private DcMotor rightIntake;
-    private DcMotor claw;
+    private DcMotor elevator;
 
     private Servo leftLatch;
     private Servo rightLatch;
@@ -44,6 +45,9 @@ public class Component {
     public final int INTAKE = 1;
     public final int RELEASE = 2;
 
+    public final int UP = 1;
+    public final int DOWN = -1;
+
     public Component(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
 
@@ -53,14 +57,14 @@ public class Component {
         leftLatch = hardwareMap.servo.get("left latch");
         rightLatch = hardwareMap.servo.get("right latch");
 
-        claw = hardwareMap.dcMotor.get("claw");
+        elevator = hardwareMap.dcMotor.get("elevator");
     }
 
     // Accessor/Mutator
     public HardwareMap getHardwareMap() {return hardwareMap;}
     public DcMotor getLeftIntake() {return leftIntake;}
     public DcMotor getRightIntake() {return rightIntake;}
-    public DcMotor getClaw() {return claw;}
+    public DcMotor getElevator() {return elevator;}
     public Servo getLeftLatch() {return leftLatch;}
     public Servo getRightLatch() {return rightLatch;}
     public ColorSensor getColorSensor() {return colorSensor;}
@@ -70,7 +74,7 @@ public class Component {
     public void setHardwareMap(HardwareMap hardwareMap) {this.hardwareMap = hardwareMap;}
     public void setLeftIntake(DcMotor leftIntake) {this.leftIntake = leftIntake;}
     public void setRightIntake(DcMotor rightIntake) {this.rightIntake = rightIntake;}
-    public void setClaw(DcMotor claw) {this.claw = claw;}
+    public void setElevator(DcMotor elevator) {this.elevator = elevator;}
     public void setLeftLatch(Servo leftLatch) {this.leftLatch = leftLatch;}
     public void setRightLatch(Servo rightLatch) {this.rightLatch = rightLatch;}
     public void setColorSensor(ColorSensor colorSensor) {this.colorSensor = colorSensor;}
@@ -98,6 +102,14 @@ public class Component {
         } else if (mode == STOP){
             leftIntake.setPower(0);
             rightIntake.setPower(0);
+        }
+    }
+
+    public void moveElevator(int direction) {
+        if (direction == UP) {
+            elevator.setPower(0.6);
+        } else if (direction == DOWN) {
+            elevator.setPower(-0.6);
         }
     }
 

@@ -12,7 +12,7 @@
  * - checking motor statuses
  *
  * 'Drivetrain' remains relatively constant through each season since a different game theme doesn't
- * affect a robot's basic movement abilites.
+ * affect a robot's basic movement abilities.
  *
  * Written by Timothy (Tikki) Cui
  */
@@ -37,8 +37,6 @@ public class Drivetrain {
     // enum variables
     public final int LEFT = -1;
     public final int RIGHT = 1;
-    public final int FORWARD = 1;
-    public final int BACKWARD = -1;
 
     public Drivetrain(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
