@@ -32,8 +32,6 @@ public class Component {
     private Servo leftLatch;
     private Servo rightLatch;
 
-    private ColorSensor colorSensor;
-
     private boolean isLatched = false;
     private String latchStatus = "Pending";
 
@@ -67,7 +65,6 @@ public class Component {
     public DcMotor getElevator() {return elevator;}
     public Servo getLeftLatch() {return leftLatch;}
     public Servo getRightLatch() {return rightLatch;}
-    public ColorSensor getColorSensor() {return colorSensor;}
     public boolean isLatched() {return isLatched;}
     public String getLatchStatus() {return latchStatus;}
 
@@ -77,7 +74,6 @@ public class Component {
     public void setElevator(DcMotor elevator) {this.elevator = elevator;}
     public void setLeftLatch(Servo leftLatch) {this.leftLatch = leftLatch;}
     public void setRightLatch(Servo rightLatch) {this.rightLatch = rightLatch;}
-    public void setColorSensor(ColorSensor colorSensor) {this.colorSensor = colorSensor;}
     public void setLatched(boolean latched) {isLatched = latched;}
     public void setLatchStatus(String latchStatus) {this.latchStatus = latchStatus;}
 
@@ -113,5 +109,4 @@ public class Component {
         }
     }
 
-    //TODO: add color sensor code
 }
