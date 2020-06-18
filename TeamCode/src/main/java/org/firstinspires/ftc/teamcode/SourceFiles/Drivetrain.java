@@ -1,6 +1,18 @@
-/**
- * Copyright (c) 2020, All Rights Reserved
+/* Copyright (c) 2020, All Rights Reserved
  *
+ * This file is intended for FTC Team #8696 Trobotix only. Redistribution, duplication, or use in
+ * source and binary forms, with or without modification, is not permitted without explicit
+ * permission from the creator or authorized moderator.
+ *
+ * Written by Timothy (Tikki) Cui
+ */
+
+package org.firstinspires.ftc.teamcode.SourceFiles;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+/**
  * 'Drivetrain' controls the motion motors of 'Trobot'. It contains the drive motor variables as
  * well as containing many utility methods.
  *
@@ -14,13 +26,10 @@
  * 'Drivetrain' remains relatively constant through each season since a different game theme doesn't
  * affect a robot's basic movement abilities.
  *
- * Written by Timothy (Tikki) Cui
+ * @author Tikki
+ * @version 2.4.1
+ * @since release
  */
-
-package org.firstinspires.ftc.teamcode.SourceFiles;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Drivetrain {
     private HardwareMap hardwareMap;

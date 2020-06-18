@@ -1,6 +1,19 @@
-/**
- * Copyright (c) 2020, All Rights Reserved
+/* Copyright (c) 2020, All Rights Reserved
  *
+ * This file is intended for FTC Team #8696 Trobotix only. Redistribution, duplication, or use in
+ * source and binary forms, with or without modification, is not permitted without explicit
+ * permission from the creator or authorized moderator.
+ *
+ * Written by Timothy (Tikki) Cui
+ */
+
+package org.firstinspires.ftc.teamcode.SourceFiles;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+/**
  * 'Component' controls the robot's features, mostly mechanisms designed to score points. It
  * controls robot features such as latches, claws, elevators, intake motors, etc.
  *
@@ -12,15 +25,10 @@
  * 'Component' needs a lot of rework each season. A different game theme will have a major impact on
  * a robot's components since each component is usually designed to score points
  *
- * Written by Timothy (Tikki) Cui
+ * @author Tikki
+ * @version 2.4.1
+ * @since release
  */
-
-package org.firstinspires.ftc.teamcode.SourceFiles;
-
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Component {
     private HardwareMap hardwareMap;
