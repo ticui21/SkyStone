@@ -7,7 +7,7 @@ of the summer of 2020 and will hopefully be implemented for the 2020-2021 season
 
 ## About Trobot
 
-`Trobot` is a composition of two parts: `Drivetrain` and `Component`.
+`Trobot` is a composition of two parts: `Drivetrain` and `Component`
 
 ### Drivetrain
 
