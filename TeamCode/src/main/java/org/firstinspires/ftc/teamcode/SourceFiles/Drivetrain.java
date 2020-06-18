@@ -27,7 +27,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * affect a robot's basic movement abilities.
  *
  * @author Tikki
- * @version 2.4.1
+ * @version 2.6.1
  * @since release
  */
 
