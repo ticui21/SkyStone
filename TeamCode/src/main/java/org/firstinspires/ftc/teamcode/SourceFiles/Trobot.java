@@ -31,9 +31,9 @@ public class Trobot {
 
     private ElapsedTime runtime;
 
+    // Constructor must utilize a Hardware Map from the source. However, Java always automatically
+    // creates a default constructor, so custom error message must be made to catch error
     public Trobot() {
-        // Constructor must utilize a Hardware Map from the source. However, Java always automatically
-        // creates a default constructor, so custom error message must be made to catch error
         throw new NullPointerException("Must pass hardwareMap into constructor");
     }
 
