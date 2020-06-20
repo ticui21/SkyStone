@@ -12,6 +12,12 @@ package org.firstinspires.ftc.teamcode.SourceFiles;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
 /**
  * 'Drivetrain' controls the motion motors of 'Trobot'. It contains the drive motor variables as
  * well as containing many utility methods.
@@ -43,6 +49,13 @@ public class Drivetrain {
     private boolean isSpeedReduced = false;
     private String speedStatus = "Normal";
 
+    // imu variables
+    private BNO055IMU imu;
+    private BNO055IMU.Parameters parameters;
+    private Orientation lastAngles;
+    private double globalAngle;
+    private double correction;
+
     // enum variables
     public final int LEFT = -1;
     public final int RIGHT = 1;
@@ -50,6 +63,7 @@ public class Drivetrain {
     public Drivetrain(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
 
+        // drive motors
         frontLeftDrive = hardwareMap.get(DcMotor.class, "front left");
         frontRightDrive = hardwareMap.get(DcMotor.class, "front right");
         rearLeftDrive = hardwareMap.get(DcMotor.class, "rear left");
@@ -62,6 +76,22 @@ public class Drivetrain {
         frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        // imu
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+
+        parameters = new BNO055IMU.Parameters();
+
+        parameters.mode = BNO055IMU.SensorMode.IMU;
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit= BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.loggingEnabled = false;
+
+        imu.initialize(parameters);
+
+        lastAngles = new Orientation();
+
+        while (!imu.isGyroCalibrated()) {}
     }
     
     // Accessor/Mutator
@@ -155,11 +185,12 @@ public class Drivetrain {
         rearLeftDrive.setPower(power);
         rearRightDrive.setPower(power);
 
-        try {
-            Thread.sleep((long)(time));
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        sleep((long)(time));
+
+        frontLeftDrive.setPower(0);
+        frontRightDrive.setPower(0);
+        rearLeftDrive.setPower(0);
+        rearRightDrive.setPower(0);
     }
 
 //    public void autoDriveDistance(double power, double distance) {
@@ -234,5 +265,116 @@ public class Drivetrain {
 
     public boolean isBusy() {
         return frontLeftDrive.isBusy() || frontRightDrive.isBusy() || rearLeftDrive.isBusy() || rearRightDrive.isBusy();
+    }
+
+    public void sleep(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    // IMU
+    /**
+     * Resets the cumulative angle tracking to zero.
+     */
+    private void resetAngle() {
+        lastAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        globalAngle = 0;
+    }
+
+    /**
+     * Get current cumulative angle rotation from last reset.
+     * @return Angle in degrees. + = left, - = right.
+     */
+    private double getAngle() {
+        // We experimentally determined the Z axis is the axis we want to use for heading angle.
+        // We have to process the angle because the imu works in euler angles so the Z axis is
+        // returned as 0 to +180 or 0 to -180 rolling back to -179 or +179 when rotation passes
+        // 180 degrees. We detect this transition and track the total cumulative angle of rotation.
+
+        Orientation angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        double deltaAngle = angles.firstAngle - lastAngles.firstAngle;
+
+        if (deltaAngle < -180) {
+            deltaAngle += 360;
+        } else if (deltaAngle > 180) {
+            deltaAngle -= 360;
+        }
+
+        globalAngle += deltaAngle;
+        lastAngles = angles;
+
+        return globalAngle;
+    }
+
+    /**
+     * See if we are moving in a straight line and if not return a power correction value.
+     * @return Power adjustment, + is adjust left - is adjust right.
+     */
+    private double checkDirection() {
+        // The gain value determines how sensitive the correction is to direction changes.
+        // You will have to experiment with your robot to get small smooth direction changes
+        // to stay on a straight line.
+        double correction, angle, gain = .10;
+
+        angle = getAngle();
+
+        if (angle == 0) {
+            correction = 0;             // no adjustment.
+        } else {
+            correction = -angle;        // reverse sign of angle for correction.
+        }
+
+        correction = correction * gain;
+
+        return correction;
+    }
+
+    /**
+     * Rotate left or right the number of degrees. Does not support turning more than 180 degrees.
+     * @param degrees Degrees to turn, + is left - is right
+     */
+    private void rotate(int degrees, double power) {
+        double  leftPower, rightPower;
+
+        // restart imu movement tracking.
+        resetAngle();
+
+        // getAngle() returns + when rotating counter clockwise (left) and - when rotating
+        // clockwise (right).
+
+        if (degrees < 0) {   // turn right.
+            leftPower = power;
+            rightPower = -power;
+        } else if (degrees > 0) {   // turn left.
+            leftPower = -power;
+            rightPower = power;
+        }
+        else return;
+
+        // set power to rotate.
+        drive(leftPower, rightPower);
+
+        // rotate until turn is completed.
+        if (degrees < 0) { // On right turn we have to get off zero first.
+            while (getAngle() == 0) {}
+
+            while (getAngle() > degrees) {}
+        } else { // left turn.
+            while (getAngle() < degrees) {}
+        }
+
+        // turn the motors off.
+        stop();
+
+        // wait for rotation to stop.
+        sleep(1000);
+
+        // reset angle tracking on new heading.
+        resetAngle();
     }
 }
