@@ -31,7 +31,6 @@ public class Auto_IMU extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
         trobot = new Trobot(hardwareMap);
-        trobot.getDrivetrain().stop();
 
         // get a reference to touch sensor.
         touch = hardwareMap.touchSensor.get("touch_sensor");
