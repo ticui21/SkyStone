@@ -276,6 +276,13 @@ public class Drivetrain {
     }
 
     // IMU
+    private void driveIMU(double power) {
+        // Use gyro to drive in a straight line.
+        correction = checkDirection();
+
+        drive(power - correction, power + correction);
+    }
+
     /**
      * Resets the cumulative angle tracking to zero.
      */
