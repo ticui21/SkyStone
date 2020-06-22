@@ -20,9 +20,6 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
 
 @Autonomous(name = "Encoder (beta)", group = "Autonomous")
 public class Auto_Square extends LinearOpMode {
-    private double TPI_F = 1120 / (Math.PI * 4);
-    private double TPI_B = TPI_F * 0.5;
-
     private Trobot trobot;
 
     public void runOpMode() {
@@ -44,7 +41,7 @@ public class Auto_Square extends LinearOpMode {
         trobot.getDrivetrain().stop();
         sleep(1000);
 
-        trobot.getDrivetrain().strafe(-1, 0.5);
+        trobot.getDrivetrain().strafe(trobot.getDrivetrain().LEFT, 0.5);
         sleep(3000);
 
         trobot.getDrivetrain().stop();
@@ -56,7 +53,7 @@ public class Auto_Square extends LinearOpMode {
         trobot.getDrivetrain().stop();
         sleep(1000);
 
-        trobot.getDrivetrain().strafe(1, 0.5);
+        trobot.getDrivetrain().strafe(trobot.getDrivetrain().RIGHT, 0.5);
         sleep(3000);
 
         trobot.getDrivetrain().stop();
