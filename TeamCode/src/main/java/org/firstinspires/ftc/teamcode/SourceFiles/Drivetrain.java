@@ -140,14 +140,6 @@ public class Drivetrain {
         }
     }
 
-    public void turn(int direction, double degrees) {
-        if (direction == LEFT) {
-            // TODO: implement function body
-        } else if (direction == RIGHT) {
-            // TODO: implement function body
-        }
-    }
-
     public void stop() {
         frontLeftDrive.setPower(0);
         frontRightDrive.setPower(0);
@@ -179,13 +171,13 @@ public class Drivetrain {
         }
     }
 
-    public void autoDriveTime(double power, double time) {
+    public void autoDriveTime(double power, double milliseconds) {
         frontLeftDrive.setPower(power);
         frontRightDrive.setPower(power);
         rearLeftDrive.setPower(power);
         rearRightDrive.setPower(power);
 
-        sleep((long)(time));
+        sleep((long)(milliseconds));
 
         frontLeftDrive.setPower(0);
         frontRightDrive.setPower(0);
@@ -267,9 +259,9 @@ public class Drivetrain {
         return frontLeftDrive.isBusy() || frontRightDrive.isBusy() || rearLeftDrive.isBusy() || rearRightDrive.isBusy();
     }
 
-    public void sleep(long time) {
+    public void sleep(long milliseconds) {
         try {
-            Thread.sleep(time);
+            Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
