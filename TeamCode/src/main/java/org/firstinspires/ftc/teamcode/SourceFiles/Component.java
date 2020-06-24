@@ -43,17 +43,6 @@ public class Component {
     private boolean isLatched = false;
     private String latchStatus = "Pending";
 
-    // enum variables
-    public final int LATCH = 1;
-    public final int UNLATCH = 0;
-
-    public final int STOP = 0;
-    public final int INTAKE = 1;
-    public final int RELEASE = 2;
-
-    public final int UP = 1;
-    public final int DOWN = -1;
-
     public Component(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
 
@@ -86,33 +75,33 @@ public class Component {
     public void setLatchStatus(String latchStatus) {this.latchStatus = latchStatus;}
 
     // Utilities
-    public void latch(int mode) {
-        if (mode == LATCH) {
+    public void latch(Trobot.Mode mode) {
+        if (mode == Trobot.Mode.LATCH) {
             leftLatch.setPosition(0.5);
             rightLatch.setPosition(0.3);
-        } else if (mode == UNLATCH) {
+        } else if (mode == Trobot.Mode.UNLATCH) {
             leftLatch.setPosition(1);
             rightLatch.setPosition(0);
         }
     }
 
-    public void intake(int mode) {
-        if (mode == INTAKE) {
+    public void intake(Trobot.Mode mode) {
+        if (mode == Trobot.Mode.INTAKE) {
             leftIntake.setPower(0.5);
             rightIntake.setPower(-0.5);
-        } else if (mode == RELEASE) {
+        } else if (mode == Trobot.Mode.RELEASE) {
             leftIntake.setPower(-0.2);
             rightIntake.setPower(0.2);
-        } else if (mode == STOP){
+        } else if (mode == Trobot.Mode.STOP){
             leftIntake.setPower(0);
             rightIntake.setPower(0);
         }
     }
 
-    public void moveElevator(int direction) {
-        if (direction == UP) {
+    public void moveElevator(Trobot.Mode mode) {
+        if (mode == Trobot.Mode.UP) {
             elevator.setPower(0.6);
-        } else if (direction == DOWN) {
+        } else if (mode == Trobot.Mode.DOWN) {
             elevator.setPower(-0.6);
         }
     }

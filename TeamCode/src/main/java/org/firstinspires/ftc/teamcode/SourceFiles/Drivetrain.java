@@ -56,10 +56,6 @@ public class Drivetrain {
     private double globalAngle;
     private double correction;
 
-    // enum variables
-    public final int LEFT = -1;
-    public final int RIGHT = 1;
-
     public Drivetrain(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
 
@@ -157,13 +153,13 @@ public class Drivetrain {
         }
     }
 
-    public void strafe(int direction, double power) {
-        if (direction == LEFT) {
+    public void strafe(Trobot.Mode mode, double power) {
+        if (mode == Trobot.Mode.LEFT) {
             frontLeftDrive.setPower(power);
             frontRightDrive.setPower(-power);
             rearLeftDrive.setPower(-power);
             rearRightDrive.setPower(power);
-        } else if (direction == RIGHT) {
+        } else if (mode == Trobot.Mode.RIGHT) {
             frontLeftDrive.setPower(-power);
             frontRightDrive.setPower(power);
             rearLeftDrive.setPower(power);

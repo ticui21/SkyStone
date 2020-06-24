@@ -31,6 +31,9 @@ public class Trobot {
 
     private ElapsedTime runtime;
 
+    //enum variables
+    public enum Mode {LATCH, UNLATCH, STOP, INTAKE, RELEASE, UP, DOWN, LEFT, RIGHT}
+
     // Constructor must utilize a Hardware Map from the source. However, Java always automatically
     // creates a default constructor, so custom error message must be made to catch error
     public Trobot() {
@@ -57,3 +60,4 @@ public class Trobot {
     public void setComponent(Component component) {this.component = component;}
     public void setElapsedTime(ElapsedTime runtime) {this.runtime = runtime;}
 }
+
