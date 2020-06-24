@@ -116,5 +116,4 @@ public class Component {
             elevator.setPower(-0.6);
         }
     }
-
 }
