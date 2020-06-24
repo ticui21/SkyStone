@@ -29,7 +29,6 @@ public class TeleOp_Basic extends LinearOpMode {
         telemetry.update();
 
         trobot = new Trobot(hardwareMap);
-        trobot.getComponent().setRightIntake(null);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -47,25 +46,25 @@ public class TeleOp_Basic extends LinearOpMode {
 
             // Set D-Pad for strafing -> not used for Joe 2019-2020
             if (gamepad1.dpad_left) {
-                trobot.getDrivetrain().strafe(trobot.getDrivetrain().LEFT, 1);
+                trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 1);
             } else if (gamepad1.dpad_right) {
-                trobot.getDrivetrain().strafe(trobot.getDrivetrain().RIGHT, 1);
+                trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 1);
             }
 
             // Map triggers to intake motors
             if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
-                trobot.getComponent().intake(trobot.getComponent().INTAKE);
+                trobot.getComponent().intake(Trobot.Mode.INTAKE);
             } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) {
-                trobot.getComponent().intake(trobot.getComponent().RELEASE);
+                trobot.getComponent().intake(Trobot.Mode.RELEASE);
             } else {
-                trobot.getComponent().intake(trobot.getComponent().STOP);
+                trobot.getComponent().intake(Trobot.Mode.STOP);
             }
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
-                trobot.getComponent().latch(trobot.getComponent().LATCH);
+                trobot.getComponent().latch(Trobot.Mode.LATCH);
             } else if (gamepad1.right_bumper) {
-                trobot.getComponent().latch(trobot.getComponent().UNLATCH);
+                trobot.getComponent().latch(Trobot.Mode.UNLATCH);
             }
 
             // Show the elapsed game time and wheel power.
