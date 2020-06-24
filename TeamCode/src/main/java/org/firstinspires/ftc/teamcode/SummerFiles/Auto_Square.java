@@ -41,7 +41,7 @@ public class Auto_Square extends LinearOpMode {
         trobot.getDrivetrain().stop();
         sleep(1000);
 
-        trobot.getDrivetrain().strafe(trobot.getDrivetrain().LEFT, 0.5);
+        trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 0.5);
         sleep(3000);
 
         trobot.getDrivetrain().stop();
@@ -53,7 +53,7 @@ public class Auto_Square extends LinearOpMode {
         trobot.getDrivetrain().stop();
         sleep(1000);
 
-        trobot.getDrivetrain().strafe(trobot.getDrivetrain().RIGHT, 0.5);
+        trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 0.5);
         sleep(3000);
 
         trobot.getDrivetrain().stop();

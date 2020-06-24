@@ -52,7 +52,7 @@ public class Auto_Foundation extends LinearOpMode {
 
         sleep(1000);
 
-        trobot.getComponent().latch(trobot.getComponent().LATCH);
+        trobot.getComponent().latch(Trobot.Mode.LATCH);
 
         sleep(1000);
 
