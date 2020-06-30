@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * that the user can import and implement.
  *
  * @author Tikki
- * @version 2.2.1
+ * @version 2.4.1
  * @since release
  */
 
@@ -32,7 +32,7 @@ public class Trobot {
     private ElapsedTime runtime;
 
     //enum variables
-    public enum Mode {LATCH, UNLATCH, STOP, INTAKE, RELEASE, UP, DOWN, LEFT, RIGHT}
+    public enum Mode {LEFT, RIGHT}
 
     // Constructor must utilize a Hardware Map from the source. However, Java always automatically
     // creates a default constructor, so custom error message must be made to catch error
