@@ -65,8 +65,8 @@ public class Drivetrain {
         rearLeftDrive = hardwareMap.get(DcMotor.class, "rear left");
         rearRightDrive = hardwareMap.get(DcMotor.class, "rear right");
 
-        frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
         rearLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
 
         frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -154,12 +154,12 @@ public class Drivetrain {
     }
 
     public void strafe(Trobot.Mode mode, double power) {
-        if (mode == Trobot.Mode.LEFT) {
+        if (mode == Trobot.Mode.RIGHT) {
             frontLeftDrive.setPower(power);
             frontRightDrive.setPower(-power);
             rearLeftDrive.setPower(-power);
             rearRightDrive.setPower(power);
-        } else if (mode == Trobot.Mode.RIGHT) {
+        } else if (mode == Trobot.Mode.LEFT) {
             frontLeftDrive.setPower(-power);
             frontRightDrive.setPower(power);
             rearLeftDrive.setPower(power);

@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  */
 
 
-@Autonomous(name = "Encoder (beta)", group = "Autonomous")
+@Autonomous(name = "Foundation", group = "Summer")
 public class Auto_Foundation extends LinearOpMode {
     private double TPI_F = 1120 / (Math.PI * 4);
     private double TPI_B = TPI_F * 0.5;

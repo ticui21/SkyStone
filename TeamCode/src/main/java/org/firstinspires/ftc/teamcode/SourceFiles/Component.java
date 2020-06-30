@@ -46,13 +46,13 @@ public class Component {
     public Component(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
 
-        leftIntake = hardwareMap.dcMotor.get("left intake");
-        rightIntake = hardwareMap.dcMotor.get("right intake");
+        //leftIntake = hardwareMap.dcMotor.get("left intake");
+       // rightIntake = hardwareMap.dcMotor.get("right intake");
 
-        leftLatch = hardwareMap.servo.get("left latch");
-        rightLatch = hardwareMap.servo.get("right latch");
+        leftLatch = hardwareMap.servo.get("left");
+        rightLatch = hardwareMap.servo.get("right");
 
-        elevator = hardwareMap.dcMotor.get("elevator");
+        //elevator = hardwareMap.dcMotor.get("elevator");
     }
 
     // Accessor/Mutator

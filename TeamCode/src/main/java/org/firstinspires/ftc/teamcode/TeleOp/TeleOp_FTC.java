@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "POV Mode", group = "POV Mode")
+@TeleOp(name = "FTC Mode", group = "TeleOp")
 public class TeleOp_FTC extends LinearOpMode {
     private ElapsedTime runtime;
 

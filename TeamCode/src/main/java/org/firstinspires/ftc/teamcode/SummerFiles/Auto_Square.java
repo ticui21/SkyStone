@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name = "Encoder (beta)", group = "Autonomous")
+@Autonomous(name = "Square", group = "Summer")
 public class Auto_Square extends LinearOpMode {
     private Trobot trobot;
 
@@ -35,25 +35,25 @@ public class Auto_Square extends LinearOpMode {
         waitForStart();
         trobot.getRuntime().reset();
 
-        trobot.getDrivetrain().drive(0.5);
+        trobot.getDrivetrain().drive(0.3);
+        sleep(2000);
+
+        trobot.getDrivetrain().stop();
+        sleep(1000);
+
+        trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 0.3);
         sleep(3000);
 
         trobot.getDrivetrain().stop();
         sleep(1000);
 
-        trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 0.5);
-        sleep(3000);
+        trobot.getDrivetrain().drive(-0.3);
+        sleep(2000);
 
         trobot.getDrivetrain().stop();
         sleep(1000);
 
-        trobot.getDrivetrain().drive(-0.5);
-        sleep(3000);
-
-        trobot.getDrivetrain().stop();
-        sleep(1000);
-
-        trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 0.5);
+        trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 0.3);
         sleep(3000);
 
         trobot.getDrivetrain().stop();

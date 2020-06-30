@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Tank Mode", group = "Tank Mode")
+@TeleOp(name = "Tank Mode", group = "TeleOp")
 public class TeleOp_Tank extends LinearOpMode {
     public Trobot trobot;
 
@@ -28,7 +28,6 @@ public class TeleOp_Tank extends LinearOpMode {
         telemetry.update();
 
         trobot = new Trobot(hardwareMap);
-        trobot.getComponent().setRightIntake(null);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -37,8 +36,8 @@ public class TeleOp_Tank extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             // Tank Mode uses both sticks to control each side.
-            double leftPower = gamepad1.left_stick_y;
-            double rightPower = gamepad1.right_stick_y;
+            double leftPower = -gamepad1.left_stick_y;
+            double rightPower = -gamepad1.right_stick_y;
 
             trobot.getDrivetrain().drive(leftPower, rightPower);
 
@@ -48,7 +47,7 @@ public class TeleOp_Tank extends LinearOpMode {
             } else if (gamepad1.dpad_right) {
                 trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 1);
             }
-
+/*
             // Map triggers to intake motors
             if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
                 trobot.getComponent().intake(Trobot.Mode.INTAKE);
@@ -56,7 +55,7 @@ public class TeleOp_Tank extends LinearOpMode {
                 trobot.getComponent().intake(Trobot.Mode.RELEASE);
             } else {
                 trobot.getComponent().intake(Trobot.Mode.STOP);
-            }
+            }*/
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
@@ -69,6 +68,8 @@ public class TeleOp_Tank extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + trobot.getRuntime().toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", -gamepad1.left_stick_y, -gamepad1.right_stick_y);
             telemetry.addData("Servos", trobot.getComponent().getLatchStatus());
+            telemetry.addData("LBumper", trobot.getComponent().getLeftLatch());
+            telemetry.addData("RBumper", trobot.getComponent().getRightLatch());
             telemetry.update();
         }
     }

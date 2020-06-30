@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "POV Mode", group = "POV Mode")
+@TeleOp(name = "Basic", group = "Summer")
 public class TeleOp_Basic extends LinearOpMode {
     public Trobot trobot;
 

@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
 
-@Autonomous(name="Drive Avoid Imu", group="Exercises")
+@Autonomous(name = "IMU", group = "Summer")
 //@Disabled
 public class Auto_IMU extends LinearOpMode {
     private TouchSensor touch;

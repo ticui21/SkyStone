@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "POV Mode", group = "POV Mode")
+@TeleOp(name = "POV Mode", group = "TeleOp")
 public class TeleOp_POV extends LinearOpMode {
     public Trobot trobot;
 
@@ -29,7 +29,6 @@ public class TeleOp_POV extends LinearOpMode {
         telemetry.update();
 
         trobot = new Trobot(hardwareMap);
-        trobot.getComponent().setRightIntake(null);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -39,8 +38,8 @@ public class TeleOp_POV extends LinearOpMode {
         while (opModeIsActive()) {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
-            double leftPower = Range.clip(gamepad1.left_stick_y - gamepad1.right_stick_x, -1.0, 1.0);
-            double rightPower = Range.clip(gamepad1.left_stick_y + gamepad1.right_stick_x, -1.0, 1.0);
+            double leftPower = Range.clip(-gamepad1.left_stick_y + gamepad1.right_stick_x, -1.0, 1.0);
+            double rightPower = Range.clip(-gamepad1.left_stick_y - gamepad1.right_stick_x, -1.0, 1.0);
 
             // Send calculated power to wheels
             trobot.getDrivetrain().drive(leftPower, rightPower);
@@ -57,14 +56,14 @@ public class TeleOp_POV extends LinearOpMode {
                 trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 1);
             }
 
-            // Map triggers to intake motors
-            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
-                trobot.getComponent().intake(Trobot.Mode.INTAKE);
-            } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) {
-                trobot.getComponent().intake(Trobot.Mode.RELEASE);
-            } else {
-                trobot.getComponent().intake(Trobot.Mode.STOP);
-            }
+//            // Map triggers to intake motors
+//            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
+//                trobot.getComponent().intake(Trobot.Mode.INTAKE);
+//            } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) {
+//                trobot.getComponent().intake(Trobot.Mode.RELEASE);
+//            } else {
+//                trobot.getComponent().intake(Trobot.Mode.STOP);
+//            }
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
