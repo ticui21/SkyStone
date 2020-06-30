@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 //Basic autonomous that causes a robot to move in a square
 
 
-@Autonomous (name= "Square Autonomous", group = "Autonomous")
+@Autonomous (name= "Vicki - Square Autonomous", group = "Autonomous")
 public class squareAutonomous extends LinearOpMode {
 
     //Define DcMotor variables
