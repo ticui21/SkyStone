@@ -36,6 +36,7 @@ public class Component {
     private DcMotor leftIntake;
     private DcMotor rightIntake;
     private DcMotor elevator;
+    private DcMotor claw;
 
     private Servo leftLatch;
     private Servo rightLatch;
@@ -52,7 +53,8 @@ public class Component {
         leftLatch = hardwareMap.servo.get("left");
         rightLatch = hardwareMap.servo.get("right");
 
-        //elevator = hardwareMap.dcMotor.get("elevator");
+//        elevator = hardwareMap.dcMotor.get("elevator");
+//        claw = hardwareMap.dcMotor.get("claw");
     }
 
     // Accessor/Mutator
@@ -60,6 +62,7 @@ public class Component {
     public DcMotor getLeftIntake() {return leftIntake;}
     public DcMotor getRightIntake() {return rightIntake;}
     public DcMotor getElevator() {return elevator;}
+    public DcMotor getClaw() {return claw;}
     public Servo getLeftLatch() {return leftLatch;}
     public Servo getRightLatch() {return rightLatch;}
     public boolean isLatched() {return isLatched;}
@@ -69,40 +72,51 @@ public class Component {
     public void setLeftIntake(DcMotor leftIntake) {this.leftIntake = leftIntake;}
     public void setRightIntake(DcMotor rightIntake) {this.rightIntake = rightIntake;}
     public void setElevator(DcMotor elevator) {this.elevator = elevator;}
+    public void setClaw(DcMotor claw) {this.claw = claw;}
     public void setLeftLatch(Servo leftLatch) {this.leftLatch = leftLatch;}
     public void setRightLatch(Servo rightLatch) {this.rightLatch = rightLatch;}
     public void setLatched(boolean latched) {isLatched = latched;}
     public void setLatchStatus(String latchStatus) {this.latchStatus = latchStatus;}
 
     // Utilities
-    public void latch(Trobot.Mode mode) {
-        if (mode == Trobot.Mode.LATCH) {
-            leftLatch.setPosition(0.5);
-            rightLatch.setPosition(0.3);
-        } else if (mode == Trobot.Mode.UNLATCH) {
-            leftLatch.setPosition(1);
-            rightLatch.setPosition(0);
-        }
+    public void latch() {
+        leftLatch.setPosition(0.5);
+        rightLatch.setPosition(0.3);
     }
 
-    public void intake(Trobot.Mode mode) {
-        if (mode == Trobot.Mode.INTAKE) {
-            leftIntake.setPower(0.5);
-            rightIntake.setPower(-0.5);
-        } else if (mode == Trobot.Mode.RELEASE) {
-            leftIntake.setPower(-0.2);
-            rightIntake.setPower(0.2);
-        } else if (mode == Trobot.Mode.STOP){
-            leftIntake.setPower(0);
-            rightIntake.setPower(0);
-        }
+    public void unlatch() {
+        leftLatch.setPosition(0);
+        rightLatch.setPosition(1);
     }
 
-    public void moveElevator(Trobot.Mode mode) {
-        if (mode == Trobot.Mode.UP) {
-            elevator.setPower(0.6);
-        } else if (mode == Trobot.Mode.DOWN) {
-            elevator.setPower(-0.6);
-        }
+    public void intake() {
+        leftIntake.setPower(0.5);
+        rightIntake.setPower(-0.5);
+    }
+
+    public void release() {
+        leftIntake.setPower(-0.2);
+        rightIntake.setPower(0.2);
+    }
+
+    public void stopIntake() {
+        leftIntake.setPower(0);
+        rightIntake.setPower(0);
+    }
+
+    public void raiseElevator() {
+        elevator.setPower(0.5);
+    }
+
+    public void lowerElevator() {
+        elevator.setPower(-0.5);
+    }
+
+    public void openClaw() {
+        claw.setPower(0.5);
+    }
+
+    public void closeClaw() {
+        claw.setPower(-0.5);
     }
 }
