@@ -35,6 +35,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  * @author Tikki
  * @version 4.8.3
  * @since release
+ *
+ * Version Log: https://docs.google.com/document/d/1grqlfPZ2qIrb3CIF2aWJTiKoygQXw1z6A0UvgkgxKjM/edit?usp=sharing
  */
 
 public class Drivetrain {

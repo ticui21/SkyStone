@@ -28,6 +28,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * @author Tikki
  * @version 3.5.2
  * @since release
+ *
+ * Version Log: https://docs.google.com/document/d/1grqlfPZ2qIrb3CIF2aWJTiKoygQXw1z6A0UvgkgxKjM/edit?usp=sharing
  */
 
 public class Component {
