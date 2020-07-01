@@ -52,7 +52,7 @@ public class TeleOp_FTC extends LinearOpMode {
         rearLeftDrive = hardwareMap.get(DcMotor.class, "rear left");
         rearRightDrive = hardwareMap.get(DcMotor.class, "rear right");
 
-        frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         rearLeftDrive.setDirection(DcMotor.Direction.REVERSE);
 
         frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -60,8 +60,8 @@ public class TeleOp_FTC extends LinearOpMode {
         rearLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rearRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        leftIntake = hardwareMap.dcMotor.get("left intake");
-        rightIntake = hardwareMap.dcMotor.get("right intake");
+//        leftIntake = hardwareMap.dcMotor.get("left intake");
+//        rightIntake = hardwareMap.dcMotor.get("right intake");
 
         leftLatch = hardwareMap.servo.get("left latch");
         rightLatch = hardwareMap.servo.get("right latch");
@@ -74,8 +74,8 @@ public class TeleOp_FTC extends LinearOpMode {
         while (opModeIsActive()) {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
-            double leftPower = Range.clip(gamepad1.left_stick_y - gamepad1.right_stick_x, -1.0, 1.0);
-            double rightPower = Range.clip(gamepad1.left_stick_y + gamepad1.right_stick_x, -1.0, 1.0);
+            double leftPower = Range.clip(-gamepad1.left_stick_y + gamepad1.right_stick_x, -1.0, 1.0);
+            double rightPower = Range.clip(-gamepad1.left_stick_y - gamepad1.right_stick_x, -1.0, 1.0);
 
             // Send calculated power to wheels
             frontLeftDrive.setPower(leftPower);
@@ -96,17 +96,17 @@ public class TeleOp_FTC extends LinearOpMode {
                 rearRightDrive.setPower(-0.7);
             }
 
-            // Map triggers to intake motors
-            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) { // intake is more power because the brick can be slippery
-                leftIntake.setPower(0.5);
-                rightIntake.setPower(-0.5);
-            } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) { // release is less power so it doesn't shoot the brick
-                leftIntake.setPower(-0.2);
-                rightIntake.setPower(0.2);
-            } else {
-                leftIntake.setPower(0);
-                rightIntake.setPower(0);
-            }
+//            // Map triggers to intake motors
+//            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) { // intake is more power because the brick can be slippery
+//                leftIntake.setPower(0.5);
+//                rightIntake.setPower(-0.5);
+//            } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) { // release is less power so it doesn't shoot the brick
+//                leftIntake.setPower(-0.2);
+//                rightIntake.setPower(0.2);
+//            } else {
+//                leftIntake.setPower(0);
+//                rightIntake.setPower(0);
+//            }
 
             // Map bumpers to foundation latches (Servo angles were determined by lab measurements)
             if (gamepad1.left_bumper) {

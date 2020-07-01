@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.SummerFiles;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -21,7 +22,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-
+@Disabled
 @Autonomous(name = "Foundation", group = "Summer")
 public class Auto_Foundation extends LinearOpMode {
     private double TPI_F = 1120 / (Math.PI * 4);
@@ -43,6 +44,7 @@ public class Auto_Foundation extends LinearOpMode {
         trobot.getRuntime().reset();
 
         trobot.getDrivetrain().autoDriveEncoder(0.5, 10);
+        trobot.getComponent().unlatch();
 
         while(trobot.getDrivetrain().isBusy() && opModeIsActive()) {
             idle();
@@ -52,7 +54,7 @@ public class Auto_Foundation extends LinearOpMode {
 
         sleep(1000);
 
-        trobot.getComponent().latch(Trobot.Mode.LATCH);
+        trobot.getComponent().latch();
 
         sleep(1000);
 

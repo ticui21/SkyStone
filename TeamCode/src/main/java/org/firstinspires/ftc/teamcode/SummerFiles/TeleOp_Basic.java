@@ -53,18 +53,18 @@ public class TeleOp_Basic extends LinearOpMode {
 
             // Map triggers to intake motors
             if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
-                trobot.getComponent().intake(Trobot.Mode.INTAKE);
+                trobot.getComponent().intake();
             } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) {
-                trobot.getComponent().intake(Trobot.Mode.RELEASE);
+                trobot.getComponent().release();
             } else {
-                trobot.getComponent().intake(Trobot.Mode.STOP);
+                trobot.getComponent().stopIntake();
             }
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
-                trobot.getComponent().latch(Trobot.Mode.LATCH);
+                trobot.getComponent().latch();
             } else if (gamepad1.right_bumper) {
-                trobot.getComponent().latch(Trobot.Mode.UNLATCH);
+                trobot.getComponent().unlatch();
             }
 
             // Show the elapsed game time and wheel power.
