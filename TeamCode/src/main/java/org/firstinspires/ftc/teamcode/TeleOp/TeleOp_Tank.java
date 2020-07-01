@@ -41,6 +41,11 @@ public class TeleOp_Tank extends LinearOpMode {
 
             trobot.getDrivetrain().drive(leftPower, rightPower);
 
+            // Set a-button for speed reduction
+            if (gamepad1.a) {
+                trobot.getDrivetrain().switchSpeed();
+            }
+
             // Set D-Pad for strafing -> not used for Joe 2019-2020
             if (gamepad1.dpad_left) {
                 trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 1);
@@ -59,9 +64,9 @@ public class TeleOp_Tank extends LinearOpMode {
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
-                trobot.getComponent().latch(Trobot.Mode.LATCH);
+                trobot.getComponent().latch();
             } else if (gamepad1.right_bumper) {
-                trobot.getComponent().latch(Trobot.Mode.UNLATCH);
+                trobot.getComponent().unlatch();
             }
 
             // Show the elapsed game time and wheel power.

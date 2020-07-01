@@ -67,9 +67,9 @@ public class TeleOp_POV extends LinearOpMode {
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
-                trobot.getComponent().latch(Trobot.Mode.LATCH);
+                trobot.getComponent().latch();
             } else if (gamepad1.right_bumper) {
-                trobot.getComponent().latch(Trobot.Mode.UNLATCH);
+                trobot.getComponent().unlatch();
             }
 
             // Show the elapsed game time and wheel power.
