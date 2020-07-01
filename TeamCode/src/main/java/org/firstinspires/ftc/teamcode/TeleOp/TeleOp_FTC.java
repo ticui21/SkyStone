@@ -96,18 +96,6 @@ public class TeleOp_FTC extends LinearOpMode {
                 rearRightDrive.setPower(-0.7);
             }
 
-//            // Map triggers to intake motors
-//            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) { // intake is more power because the brick can be slippery
-//                leftIntake.setPower(0.5);
-//                rightIntake.setPower(-0.5);
-//            } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) { // release is less power so it doesn't shoot the brick
-//                leftIntake.setPower(-0.2);
-//                rightIntake.setPower(0.2);
-//            } else {
-//                leftIntake.setPower(0);
-//                rightIntake.setPower(0);
-//            }
-
             // Map bumpers to foundation latches (Servo angles were determined by lab measurements)
             if (gamepad1.left_bumper) {
                 leftLatch.setPosition(0.5);

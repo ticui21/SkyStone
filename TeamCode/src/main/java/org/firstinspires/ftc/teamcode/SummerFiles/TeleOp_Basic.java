@@ -46,18 +46,13 @@ public class TeleOp_Basic extends LinearOpMode {
 
             // Set D-Pad for strafing -> not used for Joe 2019-2020
             if (gamepad1.dpad_left) {
-                trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 1);
+                trobot.getDrivetrain().strafeLeft(1);
             } else if (gamepad1.dpad_right) {
-                trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 1);
-            }
-
-            // Map triggers to intake motors
-            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
-                trobot.getComponent().intake();
-            } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) {
-                trobot.getComponent().release();
-            } else {
-                trobot.getComponent().stopIntake();
+                trobot.getDrivetrain().strafeRight(1);
+            } else if (gamepad1.dpad_up) {
+                trobot.getDrivetrain().drive(1);
+            } else if (gamepad1.dpad_down) {
+                trobot.getDrivetrain().drive(-1);
             }
 
             // Map bumpers to foundation latches

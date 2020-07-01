@@ -47,14 +47,11 @@ public class Component {
     public Component(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
 
-        //leftIntake = hardwareMap.dcMotor.get("left intake");
-       // rightIntake = hardwareMap.dcMotor.get("right intake");
-
         leftLatch = hardwareMap.servo.get("left");
         rightLatch = hardwareMap.servo.get("right");
 
-//        elevator = hardwareMap.dcMotor.get("elevator");
-//        claw = hardwareMap.dcMotor.get("claw");
+        elevator = hardwareMap.dcMotor.get("elevator");
+        claw = hardwareMap.dcMotor.get("claw");
     }
 
     // Accessor/Mutator
@@ -105,18 +102,26 @@ public class Component {
     }
 
     public void raiseElevator() {
-        elevator.setPower(0.5);
+        elevator.setPower(0.75);
     }
 
     public void lowerElevator() {
-        elevator.setPower(-0.5);
+        elevator.setPower(-0.75);
     }
 
-    public void openClaw() {
-        claw.setPower(0.5);
+    public void stopElevator() {
+        elevator.setPower(0);
     }
 
-    public void closeClaw() {
-        claw.setPower(-0.5);
+    public void openClaw(double power) {
+        claw.setPower(power);
+    }
+
+    public void closeClaw(double power) {
+        claw.setPower(-power);
+    }
+
+    public void stopClaw() {
+        claw.setPower(0);
     }
 }

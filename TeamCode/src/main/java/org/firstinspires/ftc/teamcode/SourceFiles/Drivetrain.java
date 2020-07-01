@@ -110,9 +110,15 @@ public class Drivetrain {
     // Utility
     public void drive(double power) {
         if (!isSpeedReduced) {
-            drive(power, power);
+            frontLeftDrive.setPower(power);
+            frontRightDrive.setPower(power);
+            rearLeftDrive.setPower(power);
+            rearRightDrive.setPower(power);
         } else {
-            drive(0.65 * power, 0.65 * power);
+            frontLeftDrive.setPower(power * 0.65);
+            frontRightDrive.setPower(power * 0.65);
+            rearLeftDrive.setPower(power * 0.65);
+            rearRightDrive.setPower(power * 0.65);
         }
     }
 
@@ -144,18 +150,18 @@ public class Drivetrain {
         }
     }
 
-    public void strafe(Trobot.Mode mode, double power) {
-        if (mode == Trobot.Mode.RIGHT) {
-            frontLeftDrive.setPower(power);
-            frontRightDrive.setPower(-power);
-            rearLeftDrive.setPower(-power);
-            rearRightDrive.setPower(power);
-        } else if (mode == Trobot.Mode.LEFT) {
-            frontLeftDrive.setPower(-power);
-            frontRightDrive.setPower(power);
-            rearLeftDrive.setPower(power);
-            rearRightDrive.setPower(-power);
-        }
+    public void strafeRight(double power) {
+        frontLeftDrive.setPower(power);
+        frontRightDrive.setPower(-power);
+        rearLeftDrive.setPower(-power);
+        rearRightDrive.setPower(power);
+    }
+
+    public void strafeLeft(double power) {
+        frontLeftDrive.setPower(-power);
+        frontRightDrive.setPower(power);
+        rearLeftDrive.setPower(power);
+        rearRightDrive.setPower(-power);
     }
 
     public void autoDriveTime(double power, double milliseconds) {

@@ -48,19 +48,32 @@ public class TeleOp_Tank extends LinearOpMode {
 
             // Set D-Pad for strafing -> not used for Joe 2019-2020
             if (gamepad1.dpad_left) {
-                trobot.getDrivetrain().strafe(Trobot.Mode.LEFT, 1);
+                trobot.getDrivetrain().strafeLeft(1);
             } else if (gamepad1.dpad_right) {
-                trobot.getDrivetrain().strafe(Trobot.Mode.RIGHT, 1);
+                trobot.getDrivetrain().strafeRight(1);
+            } else if (gamepad1.dpad_up) {
+                trobot.getDrivetrain().drive(1);
+            } else if (gamepad1.dpad_down) {
+                trobot.getDrivetrain().drive(-1);
             }
-/*
-            // Map triggers to intake motors
+
+            // Map triggers to claw
             if (gamepad1.left_trigger > 0 && gamepad1.right_trigger == 0) {
-                trobot.getComponent().intake(Trobot.Mode.INTAKE);
+                trobot.getComponent().openClaw(gamepad1.left_trigger);
             } else if (gamepad1.right_trigger > 0 && gamepad1.left_trigger == 0) {
-                trobot.getComponent().intake(Trobot.Mode.RELEASE);
+                trobot.getComponent().closeClaw(gamepad1.right_trigger);
             } else {
-                trobot.getComponent().intake(Trobot.Mode.STOP);
-            }*/
+                trobot.getComponent().stopClaw();
+            }
+
+            // Map X & Y to elevator
+            if (gamepad1.y) {
+                trobot.getComponent().raiseElevator();
+            } else if (gamepad1.x) {
+                trobot.getComponent().lowerElevator();
+            } else {
+                trobot.getComponent().stopElevator();
+            }
 
             // Map bumpers to foundation latches
             if (gamepad1.left_bumper) {
@@ -73,8 +86,7 @@ public class TeleOp_Tank extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + trobot.getRuntime().toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", -gamepad1.left_stick_y, -gamepad1.right_stick_y);
             telemetry.addData("Servos", trobot.getComponent().getLatchStatus());
-            telemetry.addData("LBumper", trobot.getComponent().getLeftLatch());
-            telemetry.addData("RBumper", trobot.getComponent().getRightLatch());
+            telemetry.addData("Speed", trobot.getDrivetrain().getSpeedStatus());
             telemetry.update();
         }
     }
