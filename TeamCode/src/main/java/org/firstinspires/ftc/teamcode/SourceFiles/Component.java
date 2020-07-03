@@ -26,7 +26,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * a robot's components since each component is usually designed to score points
  *
  * @author Tikki
- * @version 3.5.2
+ * @version 3.6.0
  * @since release
  *
  * Version Log: https://docs.google.com/document/d/1grqlfPZ2qIrb3CIF2aWJTiKoygQXw1z6A0UvgkgxKjM/edit?usp=sharing
