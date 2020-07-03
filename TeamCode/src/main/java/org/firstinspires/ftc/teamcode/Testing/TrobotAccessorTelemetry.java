@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Tank Mode", group = "TeleOp")
+@TeleOp(name = "Telem", group = "TeleOp")
 public class TrobotAccessorTelemetry extends LinearOpMode {
     public Trobot trobot;
 
