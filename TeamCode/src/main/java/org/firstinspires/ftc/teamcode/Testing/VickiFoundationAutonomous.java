@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Foundation Autonomous", group = "Autonomous")
-public class FoundationAutonomous extends LinearOpMode {
+@Autonomous (name = "Vicki - Foundation Autonomous", group = "Vicki")
+public class VickiFoundationAutonomous extends LinearOpMode {
 
     //Define DcMotors variables
     DcMotor frontLeft;
