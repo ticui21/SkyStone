@@ -22,7 +22,6 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
 @Autonomous(name = "IMU", group = "Summer")
 //@Disabled
 public class Auto_IMU extends LinearOpMode {
-    private TouchSensor touch;
     private BNO055IMU imu;
     private Orientation lastAngles = new Orientation();
     private double globalAngle, power = .30, correction;
@@ -31,9 +30,6 @@ public class Auto_IMU extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
         trobot = new Trobot(hardwareMap);
-
-        // get a reference to touch sensor.
-        touch = hardwareMap.touchSensor.get("touch_sensor");
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -84,26 +80,10 @@ public class Auto_IMU extends LinearOpMode {
 
             trobot.getDrivetrain().drive(power - correction, power + correction);
 
-            // We record the sensor values because we will test them in more than
-            // one place with time passing between those places. See the lesson on
-            // Timing Considerations to know why
-            if (touch.isPressed() || gamepad1.a || gamepad1.b) {
-                // backup
-                trobot.getDrivetrain().drive(power);
-                sleep(500);
-
-                // stop
-                trobot.getDrivetrain().stop();
-
-                // turn 90 degrees right
-                if (touch.isPressed() || gamepad1.a) {
-                    rotate(-90, power);
-                }
-
-                // turn 90 degrees left
-                if (gamepad1.b) {
-                    rotate(90, power);
-                }
+            if (gamepad1.left_bumper) {
+                rotate(-90, power);
+            } else if (gamepad1.right_bumper) {
+                rotate(90, power);
             }
         }
 

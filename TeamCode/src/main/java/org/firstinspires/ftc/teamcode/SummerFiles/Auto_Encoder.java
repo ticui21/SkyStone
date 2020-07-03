@@ -23,9 +23,6 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
 
 @Autonomous(name = "Encoder", group = "Summer")
 public class Auto_Encoder extends LinearOpMode {
-    private double TPI_F = 1120 / (Math.PI * 4);
-    private double TPI_B = TPI_F * 0.5;
-
     private Trobot trobot;
 
     @Override
@@ -43,7 +40,7 @@ public class Auto_Encoder extends LinearOpMode {
         waitForStart();
         trobot.getRuntime().reset();
 
-        trobot.getDrivetrain().autoDriveEncoder(0.5, 1000);
+        trobot.getDrivetrain().autoDriveEncoder(0.3, 1000);
         while (trobot.getDrivetrain().isBusy() && opModeIsActive()) {}
 
         // Show the elapsed game time and wheel power.

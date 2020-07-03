@@ -25,9 +25,6 @@ import org.firstinspires.ftc.teamcode.SourceFiles.Trobot;
 @Disabled
 @Autonomous(name = "Foundation", group = "Summer")
 public class Auto_Foundation extends LinearOpMode {
-    private double TPI_F = 1120 / (Math.PI * 4);
-    private double TPI_B = TPI_F * 0.5;
-
     private Trobot trobot;
 
     public void runOpMode() {
@@ -43,7 +40,7 @@ public class Auto_Foundation extends LinearOpMode {
         waitForStart();
         trobot.getRuntime().reset();
 
-        trobot.getDrivetrain().autoDriveEncoder(0.5, 10);
+        trobot.getDrivetrain().autoDriveEncoder(0.3, 10);
         trobot.getComponent().unlatch();
 
         while(trobot.getDrivetrain().isBusy() && opModeIsActive()) {
@@ -59,7 +56,7 @@ public class Auto_Foundation extends LinearOpMode {
         sleep(1000);
 
         trobot.getDrivetrain().resetEncoder();
-        trobot.getDrivetrain().autoDriveEncoder(-0.5, 10);
+        trobot.getDrivetrain().autoDriveEncoder(-0.3, 10);
 
         while(trobot.getDrivetrain().isBusy() && opModeIsActive()){
             idle();
