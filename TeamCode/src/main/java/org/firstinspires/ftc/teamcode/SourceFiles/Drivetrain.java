@@ -139,7 +139,10 @@ public class Drivetrain {
     }
 
     public void stop() {
-        drive(0);
+        frontLeftDrive.setPower(0);
+        frontRightDrive.setPower(0);
+        rearLeftDrive.setPower(0);
+        rearRightDrive.setPower(0);
     }
 
     public void switchSpeed() {
@@ -191,7 +194,7 @@ public class Drivetrain {
 //        sleep((int)((distance / (72.5 * power)) * 1000));
 //    }
 
-    public void autoDriveEncoder(double power, double distance) {
+    public void autoDriveDistance(double power, double distance) {
         // TODO: Confirm measurements
         double threadsPerCentimeter = ((1120 * 2) / (10 * Math.PI));
 

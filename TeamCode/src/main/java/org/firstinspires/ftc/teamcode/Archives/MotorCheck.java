@@ -21,14 +21,7 @@ public class MotorCheck extends LinearOpMode {
         trobot.getRuntime().reset();
 
         // Begin tests
-        trobot.getDrivetrain().autoDriveEncoder(0.5, 100);
-
-
-
-
-
-
-
+        trobot.getDrivetrain().autoDriveDistance(0.5, 100);
     }
 
 }

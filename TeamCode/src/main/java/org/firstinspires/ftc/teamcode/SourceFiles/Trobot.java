@@ -54,7 +54,7 @@ public class Trobot {
     public Component getComponent() {return component;}
     public ElapsedTime getRuntime() {return runtime;}
 
-    public void setHardwareMap(HardwareMap hardwareMap) {this.hardwareMap = hardwareMap; }
+    public void setHardwareMap(HardwareMap hardwareMap) {this.hardwareMap = hardwareMap;}
     public void setDrivetrain(Drivetrain drivetrain) {this.drivetrain = drivetrain;}
     public void setComponent(Component component) {this.component = component;}
     public void setElapsedTime(ElapsedTime runtime) {this.runtime = runtime;}
